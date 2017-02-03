@@ -36,17 +36,27 @@ User should be able to create new staff members, enter basic details, and update
 
 ```
 Person
-  Gender
-  Height
-  Weight
-  Age
-  Hair
-  Name
+  gender
+    string to allow non-binary genders o_O 
+  height
+    float
+    metric
+  weight
+    float
+    metric
+  dob
+    date
+  first_name
+    string
+  last_name
+    string
+  middle_name
+    string
 
 Staff < Person
-  Skills
-  Pod
-  Role
-  Employed Since
+  skills
+  pod
+  role
+  start_date
 ```
 
