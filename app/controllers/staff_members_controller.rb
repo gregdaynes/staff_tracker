@@ -11,6 +11,10 @@ class StaffMembersController < ApplicationController
     @staff_member = StaffMember.new
   end
 
+  def edit
+    @staff_member = StaffMember.find(params[:id])
+  end
+
   def create
     @staff_member = StaffMember.new(staff_member_params)
 
@@ -19,10 +23,6 @@ class StaffMembersController < ApplicationController
     else
       render 'new'
     end
-  end
-
-  def edit
-    @staff_member = StaffMember.find(params[:id])
   end
 
   def update
@@ -35,9 +35,15 @@ class StaffMembersController < ApplicationController
     end
   end
 
-  private
+  def destroy
+    @staff_member = StaffMember.find(params[:id])
+    @staff_member.destroy
 
-  def staff_member_params
-    params.require(:staff_member).permit(:first_name)
+    redirect_to staff_members_path
   end
+
+  private
+    def staff_member_params
+      params.require(:staff_member).permit(:first_name)
+    end
 end
