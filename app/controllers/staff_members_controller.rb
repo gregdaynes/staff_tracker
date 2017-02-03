@@ -21,6 +21,20 @@ class StaffMembersController < ApplicationController
     end
   end
 
+  def edit
+    @staff_member = StaffMember.find(params[:id])
+  end
+
+  def update
+    @staff_member = StaffMember.find(params[:id])
+
+    if @staff_member.update(staff_member_params)
+      redirect_to @staff_member
+    else
+      render 'edit'
+    end
+  end
+
   private
 
   def staff_member_params
