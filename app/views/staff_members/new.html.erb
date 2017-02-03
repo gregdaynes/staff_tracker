@@ -1,0 +1,10 @@
+<%= form_for :staff_member, url: staff_members_path do |f| %>
+  <p>
+    <%= f.label :first_name %><br>
+    <%= f.text_field :first_name %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
