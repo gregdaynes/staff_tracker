@@ -26,6 +26,8 @@ Things you may want to cover:
 Staff Tracker
 =============
 
+User should be able to create new staff members, enter basic details, and update their information as necessary. Eventually, everyone leaves, so deleting staff is required.
+
 - [ ] Rails
 - [ ] - [Rails Guides](guides.rubyonrails.org/getting_started.html)
 - [ ] [RSpec](http://rspec.info)
