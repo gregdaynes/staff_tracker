@@ -10,12 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170206224036) do
+ActiveRecord::Schema.define(version: 20170206233255) do
 
   create_table "roles", force: :cascade do |t|
     t.string   "field"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "skills", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "staff_member_skills", force: :cascade do |t|
+    t.integer  "staff_member_id"
+    t.integer  "skill_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["skill_id"], name: "index_staff_member_skills_on_skill_id"
+    t.index ["staff_member_id"], name: "index_staff_member_skills_on_staff_member_id"
   end
 
   create_table "staff_members", force: :cascade do |t|
