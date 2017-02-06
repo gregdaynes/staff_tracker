@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170206211000) do
+ActiveRecord::Schema.define(version: 20170206224036) do
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "field"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "staff_members", force: :cascade do |t|
     t.datetime "created_at",         null: false
@@ -18,6 +24,8 @@ ActiveRecord::Schema.define(version: 20170206211000) do
     t.integer  "pod"
     t.date     "started_at_company"
     t.integer  "user_id"
+    t.integer  "role_id"
+    t.index ["role_id"], name: "index_staff_members_on_role_id"
     t.index ["user_id"], name: "index_staff_members_on_user_id"
   end
 

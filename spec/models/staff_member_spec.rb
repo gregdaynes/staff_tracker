@@ -11,11 +11,18 @@ RSpec.describe StaffMember, type: :model do
     )
   }
 
+  let(:role) {
+    Role.new(
+      :field => "developer"
+    )
+  }
+
   subject {
     described_class.new(
       pod: 1,
       started_at_company: DateTime.now,
-      user: user
+      user: user,
+      role: role
     )
   }
 
@@ -37,6 +44,7 @@ RSpec.describe StaffMember, type: :model do
 
   describe "associations" do 
     it { should belong_to(:user) }
+    it { should belong_to(:role) }
   end
 
 end
