@@ -1,4 +1,6 @@
 class StaffMember < ApplicationRecord
-  validates :first_name, presence: true,
-                         length: { minimum: 2 } # short names, like Al, Ed
+  belongs_to :user
+
+  validates :pod, presence: true
+  validates :started_at_company, presence: true
 end
