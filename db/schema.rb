@@ -10,18 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170206201718) do
+ActiveRecord::Schema.define(version: 20170206211000) do
 
   create_table "staff_members", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "middle_name"
-    t.string   "last_name"
-    t.string   "gender"
-    t.decimal  "height"
-    t.decimal  "weight"
-    t.date     "date_of_birth"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.integer  "pod"
+    t.date     "started_at_company"
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_staff_members_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

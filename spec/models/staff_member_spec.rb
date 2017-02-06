@@ -1,15 +1,42 @@
 require 'rails_helper'
 
 RSpec.describe StaffMember, type: :model do
-  subject { described_class.new }
+  let(:user) {
+    User.new(
+      :first_name => "Gregory Daynes",
+      :email => "greg@stembolt.com",
+      :password => "abcd1234",
+      :date_of_birth => Date.new(1986,11,04),
+      :gender => "male"
+    )
+  }
 
-  it "is valid when first_name is 2 or more characters" do
-    subject.first_name = 'Al'
-    expect(subject).to be_valid
+  subject {
+    described_class.new(
+      pod: 1,
+      started_at_company: DateTime.now,
+      user: user
+    )
+  }
+
+  describe "validations" do
+    it "valid with valid attributes" do
+      expect(subject).to be_valid
+    end
+
+    it "is not be valid without pod" do
+      subject.pod = nil
+      expect(subject).to_not be_valid
+    end
+
+    it "is not be valid without start date" do
+      subject.started_at_company = nil
+      expect(subject).to_not be_valid
+    end
   end
 
-  it "is not valid when first_name is 1 or less characters" do
-    subject.first_name = 'X'
-    expect(subject).to_not be_valid
+  describe "associations" do 
+    it { should belong_to(:user) }
   end
+
 end
