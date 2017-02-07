@@ -9,6 +9,11 @@ class EmailValidator < ActiveModel::EachValidator
 end
 
 class User < ApplicationRecord
+  has_many :user_skills
+  has_many :skills, through: :user_skills
+  has_many :user_languages
+  has_many :languages, through: :user_languages
+
   validates :first_name, length: { minimum: 2 }, presence: true
   validates :email, presence: true, email: true
   validates :email, uniqueness: true, on: :create

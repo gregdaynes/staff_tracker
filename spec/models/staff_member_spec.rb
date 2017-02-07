@@ -45,8 +45,6 @@ RSpec.describe StaffMember, type: :model do
   describe "associations" do 
     it { should belong_to(:user) }
     it { should belong_to(:role) }
-    it { should have_many(:skills) }
-    it { should have_many(:languages) }
   end
 
 end

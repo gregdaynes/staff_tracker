@@ -61,4 +61,9 @@ RSpec.describe User, type: :model do
     subject.gender = nil
     expect(subject).to_not be_valid
   end
+
+  describe "validations" do 
+    it { should have_many(:skills) }
+    it { should have_many(:languages) }
+  end
 end
