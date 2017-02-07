@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170206233255) do
+ActiveRecord::Schema.define(version: 20170206234622) do
+
+  create_table "languages", force: :cascade do |t|
+    t.string   "language"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "roles", force: :cascade do |t|
     t.string   "field"
@@ -22,6 +28,15 @@ ActiveRecord::Schema.define(version: 20170206233255) do
     t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "staff_member_languages", force: :cascade do |t|
+    t.integer  "staff_member_id"
+    t.integer  "language_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["language_id"], name: "index_staff_member_languages_on_language_id"
+    t.index ["staff_member_id"], name: "index_staff_member_languages_on_staff_member_id"
   end
 
   create_table "staff_member_skills", force: :cascade do |t|
