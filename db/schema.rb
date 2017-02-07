@@ -30,24 +30,6 @@ ActiveRecord::Schema.define(version: 20170207191608) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "staff_member_languages", force: :cascade do |t|
-    t.integer  "staff_member_id"
-    t.integer  "language_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.index ["language_id"], name: "index_staff_member_languages_on_language_id"
-    t.index ["staff_member_id"], name: "index_staff_member_languages_on_staff_member_id"
-  end
-
-  create_table "staff_member_skills", force: :cascade do |t|
-    t.integer  "staff_member_id"
-    t.integer  "skill_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.index ["skill_id"], name: "index_staff_member_skills_on_skill_id"
-    t.index ["staff_member_id"], name: "index_staff_member_skills_on_staff_member_id"
-  end
-
   create_table "staff_members", force: :cascade do |t|
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false

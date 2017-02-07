@@ -1,10 +1,14 @@
 class StaffMembersController < ApplicationController
   def index
     @staff_members = StaffMember.all
+
+    render json: @staff_members
   end
 
   def show
     @staff_member = StaffMember.find(params[:id])
+
+    render json: @staff_member
   end
 
   def new
