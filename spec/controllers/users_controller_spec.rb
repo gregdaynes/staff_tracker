@@ -4,7 +4,15 @@ describe UsersController do
 
 
   describe "GET #index" do
-    it "populates an array of users"
+    it "populates an array of users" do
+      users = [create(:user)]
+      get :index
+
+      # parsed_body JSON.parse(response.body)
+      puts response.body
+      # expect(assigns(:user)).to eq(JSON.parse(users.to_json))
+      # expect(assigns(:user)).to eq([user])
+    end
     it "returns a json array of users"
   end
 
@@ -18,7 +26,7 @@ describe UsersController do
     it "returns a json object of @user" do
       user = create(:user)
       get :show, params: { id: user.id }
-      parsed_body = JSON.parse(response.body);
+      parsed_body = JSON.parse(response.body)
       expect(parsed_body).to eq(JSON.parse(user.to_json))
     end
   end
