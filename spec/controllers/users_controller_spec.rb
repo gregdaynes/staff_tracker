@@ -8,8 +8,6 @@ describe UsersController do
       get :index
       expect(response.body.length >= 1).to be_truthy
     end
-
-    it "returns a json array of users"
   end
 
   describe "GET #show" do
@@ -136,8 +134,24 @@ describe UsersController do
   end
 
   describe "DELETE #destroy" do
-    it "deletes the @user from the database"
-    it "returns 200"
+    before :each do
+      @user = FactoryGirl.create(:user)
+    end
+
+    it "deletes the @user from the database" do
+      expect {
+        delete :destroy, params: {
+          id: @user
+        }
+      }.to change(User, :count).by(-1)
+    end
+
+    it "returns 200" do
+      delete :destroy, params: {
+        id: @user
+      }
+      expect(response.status).to match(200)
+    end
   end
 
 end
