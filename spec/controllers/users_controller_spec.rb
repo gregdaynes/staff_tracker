@@ -2,17 +2,13 @@ require 'rails_helper'
 
 describe UsersController do
 
-
   describe "GET #index" do
     it "populates an array of users" do
-      users = [create(:user)]
+      create_list(:user, 4)
       get :index
-
-      # parsed_body JSON.parse(response.body)
-      puts response.body
-      # expect(assigns(:user)).to eq(JSON.parse(users.to_json))
-      # expect(assigns(:user)).to eq([user])
+      expect(response.body.length >= 1).to be_truthy
     end
+
     it "returns a json array of users"
   end
 
@@ -30,30 +26,112 @@ describe UsersController do
       expect(parsed_body).to eq(JSON.parse(user.to_json))
     end
   end
-  
+
   describe "POST #create" do
     context "with valid attributes" do
-      it "saves the new @user in the database"
-      it "returns the new @user"
+      it "saves the new @user in the database" do
+        user = FactoryGirl.attributes_for(:user)
+        expect {
+          post :create, params: { user: user }
+        }.to change(User, :count).by(1)
+      end
+
+      it "returns the new @user" do
+        user = FactoryGirl.attributes_for(:user)
+        post :create, params: { user: user }
+        parsed_body = JSON.parse(response.body).except("created_at", "updated_at", "id")
+        expect(parsed_body).to eq(JSON.parse(user.to_json))
+      end
     end
 
     context "with invalid attributes" do
-      it "does not save the new @user in the database"
-      it "returns an json object with error message"
-      it "has an error code of 400"
+      it "does not save the new @user in the database" do
+        user = FactoryGirl.attributes_for(:user, first_name: nil)
+        expect {
+          post :create, params: { user: user }
+        }.to change(User, :count).by(0)
+      end
+
+      it "returns an json object with error message" do
+        user = FactoryGirl.attributes_for(:user, first_name: nil)
+        post :create, params: { user: user }
+
+        # terribly fragile
+        # TODO: Learn to write this better
+        parsed_body = JSON.parse(response.body)['errors']
+        expect(parsed_body).to include(/short/)
+      end
+
+      it "has an error code of 400" do
+        user = FactoryGirl.attributes_for(:user, first_name: nil)
+        post :create, params: { user: user }
+        expect(response.status).to match(400)
+      end
     end
   end
 
   describe "UPDATE #edit" do
+    before :each do
+      @user = FactoryGirl.create(:user, first_name: "Gregory")
+    end
+
     context "with valid attributes" do
-      it "updates the existing @user in the database"
-      it "returns the updated @user"
+      it "locates the requested @user" do
+        put :update, params: { 
+          id: @user, 
+          user: FactoryGirl.attributes_for(:user) 
+        }
+        expect(assigns(:user)).to eq(@user)
+      end
+
+      it "updates the existing @user attributes and returns @user" do
+        put :update, params: { 
+          id: @user, 
+          user: FactoryGirl.attributes_for(:user, first_name: "Greg", gender: "Male") 
+        }
+        @user.reload
+        expect(@user.first_name).to eq("Greg")
+        expect(@user.gender).to eq("Male")
+      end
     end
 
     context "with invalid attributes" do
-      it "does not save changes to the existing @user in the database"
-      it "returns an json object with error message"
-      it "has an error code of 400"
+      it "locates the requested @user" do
+        put :update, params: {
+          id: @user,
+          user: FactoryGirl.attributes_for(:invalid_user)
+        }
+        expect(assigns(:user)).to eq(@user)
+      end
+
+      it "does not save changes to the existing @user in the database" do
+        put :update, params: {
+          id: @user,
+          user: FactoryGirl.attributes_for(:user, first_name: nil)
+        }
+        @user.reload
+        expect(@user.first_name).to_not be_nil
+      end
+
+      it "returns an json object with error message" do
+        put :update, params: {
+          id: @user,
+          user: FactoryGirl.attributes_for(:user, first_name: nil)
+        }
+        @user.reload
+        # TODO: Learn to write this better
+        parsed_body = JSON.parse(response.body)['errors']
+        expect(parsed_body).to include(/short/)
+      end
+
+      it "has an error code of 400" do
+        put :update, params: {
+          id: @user,
+          user: FactoryGirl.attributes_for(:user, first_name: nil)
+        }
+        @user.reload
+        expect(response.status).to match(400)
+      end
     end
   end
 
