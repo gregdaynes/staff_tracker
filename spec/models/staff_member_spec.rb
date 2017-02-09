@@ -1,4 +1,11 @@
+# spec/models/staff_member_spec.rb
 require 'rails_helper'
+
+describe User do
+  describe "validations" do
+
+  end
+end
 
 RSpec.describe StaffMember, type: :model do
   let(:user) {

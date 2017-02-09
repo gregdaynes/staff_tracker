@@ -1,0 +1,16 @@
+<dl>
+  <dt>Name</dt>
+  <dd><%= "#{@person.first_name} #{@person.last_name}" %></dd>
+
+  <dt>Email</dt>
+  <dd><%= @person.email %></dd>
+
+  <dt>Date Of Birth</dt>
+  <dd><%= @person.date_of_birth %></dd>
+
+  <dt>Gender</dt>
+  <dd><%= @person.gender %></dd>
+</dl>
+
+<%= link_to 'Edit', edit_person_path(@person) %> |
+<%= link_to 'Back', people_path %>
