@@ -1,0 +1,24 @@
+<h1>Staff</h1>
+
+<%# <%= link_to 'New Staff', new_staff_path %>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Pod</th>
+      <th>Time With Stembolt</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @staff.each do |staff_member| %>
+      <tr>
+        <td><%= staff_member.person.first_name + ' ' + staff_member.person.last_name %></td>
+        <td><%= staff_member.pod %></td>
+        <td></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

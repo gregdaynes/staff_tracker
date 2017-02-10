@@ -18,4 +18,12 @@ class ActiveSupport::TestCase
       password_confirmation: 'abc123'
     }
   end
+
+  def new_staff
+    {
+      pod: 'One',
+      started_at_company: Date.new(2017,01,01),
+      person_id: Person.first.id
+    }
+  end
 end

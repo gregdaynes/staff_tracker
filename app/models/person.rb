@@ -1,4 +1,6 @@
 class Person < ApplicationRecord
+  has_one :staff
+
   before_save {
     email.downcase!
     gender.downcase!

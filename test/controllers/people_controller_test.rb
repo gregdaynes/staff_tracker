@@ -51,7 +51,6 @@ class PeopleControllerTest < ActionDispatch::IntegrationTest
       }
 
     @person.reload
-    puts @person.inspect
     assert_equal 'George', @person.first_name
   end
 
