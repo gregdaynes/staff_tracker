@@ -2,15 +2,7 @@ require 'test_helper'
 
 class PersonTest < ActiveSupport::TestCase
   def setup
-    @person = Person.new(
-      first_name: 'Gregory', 
-      last_name: 'Daynes', 
-      email: 'greg@stembolt.com', 
-      date_of_birth: Date.new(1986,11,04),
-      gender: 'male',
-      password: 'abc123',
-      password_confirmation: 'abc123'
-    )
+    @person = Person.new(new_person)
   end
 
   test "should be valid" do
