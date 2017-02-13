@@ -1,7 +1,6 @@
 <h1>Staff</h1>
 
-<%# <%= link_to 'New Staff', new_staff_path %>
-
+<%= link_to 'New Staff', new_staff_path %>
 
 <table>
   <thead>
@@ -17,8 +16,17 @@
       <tr>
         <td><%= staff_member.person.first_name + ' ' + staff_member.person.last_name %></td>
         <td><%= staff_member.pod %></td>
-        <td></td>
+        <td><%= "#{staff_member.time_at_company[:days]} days, #{staff_member.time_at_company[:hours]} hours" %></td>
+        <td>
+          <%= link_to 'Show', staff_path(staff_member) %>
+          <%= link_to 'Edit', edit_staff_path(staff_member) %>
+          <%= link_to 'Delete', staff_path(staff_member),
+                      method: :delete,
+                      data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<%= link_to 'Back', root_path %>

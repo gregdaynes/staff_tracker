@@ -6,14 +6,16 @@ class StaffController < ApplicationController
 
   def show
     @staff = Staff.find(params[:id])
+    @person = Person.find(@staff.person)
   end
 
   def new
-    @staff = Person.new
+    @staff = Staff.new
+    @person = Person.all
   end
 
   def edit
-    @staff = Person.find(params[:id])
+    @staff = Staff.find(params[:id])
   end
 
   def create
