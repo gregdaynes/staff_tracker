@@ -27,6 +27,10 @@ class Person < ApplicationRecord
     presence: true,
     length: { minimum: 6 },
     if: lambda { new_record? || !password.nil? }
+  validates :password_confirmation,
+    presence: true,
+    length: { minimum: 6 },
+    if: lambda { new_record? || !password_confirmation.nil? }
 
   has_secure_password
 end
