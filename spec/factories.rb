@@ -20,6 +20,14 @@ FactoryGirl.define do
     pod 1
     started_at_company Date.new(2017,01,01)
     person
+
+    trait :invalid do
+      person nil
+    end
+
+    trait :no_pod do
+      pod nil
+    end
   end
 
   factory :presentation do
